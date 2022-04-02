@@ -1,0 +1,149 @@
+-- #=== Operações CRUD ===#
+
+-- Introdução:
+
+-- Operações CRUD são uma série de comandos importantes que conseguimos fazer em um Banco de Dados. Essa sigla significa o seguinte:
+
+-- C reate: Permite criar Bancos de Dados, Tabelas ou Exibições (Views)
+
+-- R ead: Permite ler os dados do banco de dados através do SELECT.
+
+-- U pdate: Permite atualizar os dados do banco de dados, tabelas ou views
+
+-- D elete: Permite deletar dados de um banco de dados, tabelas ou views.
+
+
+
+-- 1. CRIANDO UM NOVO BANCO DE DADOS (CREATE DATABASE)
+
+-- Um banco de dados é um lugar onde conseguimos guardar informações/dados dentro de tabelas.
+-- Para criar um banco de dados, usamos o seguinte comando:
+
+CREATE DATABASE hashtag;
+
+
+-- 2. CRIANDO UMA NOVA TABELA (CREATE TABLE)
+
+-- Uma tabela tem como objetivo armazenar informações dispostas em diferentes colunas. Cada uma das colunas dessa tabela será de um tipo específico.
+
+CREATE TABLE tabela (Coluna1 TIPO1, coluna2 TIPO2);
+
+
+-- # Os Tipos de Dados mais comuns no SQL Server são:
+-- INT           --> número inteiro
+-- DECIMAL(M, D) --> número decimal com M dígitos e D casas decimais
+-- VARCHAR(N)    --> string (texto) de comprimento N
+-- DATE          --> data no formato: YYYY-MM-DD.
+
+
+-- Sabendo os principais tipos de dados, a criação das nossas tabelas segue a estrutura abaixo.
+
+-- Criando uma tabela 'alunos'
+CREATE TABLE alunos(
+	ID_Aluno INT,
+	Nome_Aluno VARCHAR(100),
+    Email VARCHAR(100)
+);
+
+-- Criando uma tabela 'cursos'
+CREATE TABLE cursos(
+	ID_Curso INT,
+	Nome_Curso VARCHAR(100),
+    Preco_Curso DECIMAL(10, 2)
+);
+
+-- Criando uma tabela 'matriculas'
+CREATE TABLE matriculas(
+	ID_Matricula INT,
+    ID_Aluno INT,
+	ID_Curso INT,
+    Data_Cadastro DATE
+);
+
+
+-- selecionando as tabelas criadas
+
+SELECT * FROM alunos;
+SELECT * FROM cursos;
+SELECT * FROM matriculas;
+
+
+-- 3. INSERINDO DADOS NAS TABELAS (INSERT INTO)
+
+-- Agora que criamos as 3 tabelas do nosso banco de dados, incuimos novas informações nessas tabelas utilizando o comando INSERT INTO.
+
+-- Adicionando dados na tabela 'alunos'
+INSERT INTO alunos(ID_Aluno, Nome_Aluno, Email)
+VALUES
+	(1, 'Ana'	, 	'ana123@gmail.com'			),
+    (2, 'Bruno'	, 	'bruno_vargas@outlook.com'	),
+    (3, 'Carla'	, 	'carlinha1999@gmail.com'	),
+    (4, 'Diego'	, 	'diicastroneves@gmail.com'	);
+
+SELECT * FROM alunos;
+
+-- Adicionando dados na tabela 'cursos'
+INSERT INTO cursos(ID_Curso, Nome_Curso, Preco_Curso)
+VALUES
+	(1, 'Excel'		, 	100),
+    (2, 'VBA'		, 	200),
+    (3, 'Power BI'	, 	150);
+
+SELECT * FROM cursos;
+
+-- Adicionando dados na tabela 'matriculas'
+INSERT INTO matriculas(ID_Matricula, ID_Aluno, ID_Curso, Data_Cadastro)
+VALUES
+	(1, 1, 1, '2021/03/11'	),
+    (2, 1, 2, '2021/06/21'	),
+    (3, 2, 3, '2021/01/08'	),
+    (4, 3, 1, '2021/04/03'	),
+    (5, 4, 1, '2021/05/10'	),
+	(6, 4, 3, '2021/05/10'	);
+
+SELECT * FROM matriculas;
+
+
+-- 4. ATUALIZANDO DADOS NAS TABELAS (UPDATE)
+
+-- Após adicionar dados em uma tabela, podemos atualizar/editar esses dados por meio do comando UPDATE. Para usá-lo, é extremamente importante incluir o comando WHERE para especificar a linha que queremos atualizar.
+
+SELECT * FROM alunos;
+SELECT * FROM cursos;
+SELECT * FROM matriculas;
+
+-- Atualizando o valor do curso de Excel.
+UPDATE cursos
+SET Preco_Curso = 300
+WHERE ID_Curso = 1;
+
+
+
+
+-- 5. DELETANDO DADOS NAS TABELAS (DELETE)
+
+-- Para excluir dados da tabela, usamos o comando DELETE. Para usá-lo, é extremamente importante incluir o comando WHERE para especificar a linha que queremos excluir.
+
+SELECT * FROM matriculas;
+SELECT * FROM alunos;
+SELECT * FROM cursos;
+
+-- Excluindo a linha 6 da tabela de matrículas.
+DELETE FROM matriculas
+WHERE ID_Matricula = 6;
+
+
+
+-- 6. EXCLUINDO UMA TABELA/BANCO DE DADOS (DROP TABLE e DROP DATABASE)
+
+-- Podemos excluir de uma vez uma tabela do banco de dados. Para isso, basta usar o comando DROP TABLE.
+
+
+DROP TABLE alunos;
+DROP TABLE cursos;
+DROP TABLE matriculas;
+
+
+-- Se quisermos exluir um banco de dados, usamos o comando DROP DATABASE.
+
+DROP DATABASE hashtag;
